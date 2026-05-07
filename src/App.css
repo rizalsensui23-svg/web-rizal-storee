@@ -1,0 +1,292 @@
+ :root {
+  --primary: #1a2a6c;
+  --secondary: #b21f1f;
+  --accent: #fdbb2d;
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --success: #25d366;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: #2d3436;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. NAVBAR UTAMA
+   ========================================================================= */
+/* --- NAVBAR UTAMA --- */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 5px 0; /* Lebih tipis */
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row; /* PAKSA menyamping di HP */
+  justify-content: space-between; /* Logo di kiri, tombol di kanan */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 90%;
+  height: 50px; /* Kunci tinggi navbar agar tidak melar */
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: row; /* Menu menyamping kecil */
+  list-style: none;
+  gap: 10px; 
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  font-size: 0.75rem; /* Perkecil tulisan menu di HP */
+}
+
+/* --- TAMPILAN UNTUK LAPTOP (Layar Lebar) --- */
+@media (min-width: 768px) {
+  .navbar {
+    padding: 10px 0;
+  }
+  
+  .nav-container {
+    height: 70px; /* Lebih longgar di laptop */
+  }
+
+  .nav-links {
+    gap: 30px;
+  }
+  
+  .nav-links a {
+    font-size: 1rem;
+  }
+}
+
+/* Supaya konten di bawah tidak tertutup navbar */
+body {
+  padding-top: 70px; 
+}
+
+/* ==========================================================================
+   3. HERO & SEARCH
+   ========================================================================= */
+.hero-section {
+  text-align: center;
+  padding: 140px 20px 60px;
+}
+
+.hero-section h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+  color: #636e72;
+  margin-bottom: 30px;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto 40px;
+  padding: 0 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 25px;
+  border-radius: 30px;
+  border: 2px solid #eee;
+  outline: none;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 4px 20px rgba(26, 42, 108, 0.2);
+}
+
+/* ==========================================================================
+   4. GRID AKUN & CARD (PERBAIKAN GAMBAR FF)
+   ========================================================================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+/* 1. Tampilan Default (Mobile/HP dulu) */
+.grid-akun {
+  display: grid;
+  /* Di HP cukup 1 kolom saja supaya lebar dan jelas */
+  grid-template-columns: 1fr; 
+  gap: 20px;
+  padding: 15px;
+}
+
+/* 2. Tampilan untuk Tablet (Layar sedang) */
+@media (min-width: 600px) {
+  .grid-akun {
+    grid-template-columns: repeat(2, 1fr); /* Jadi 2 kolom */
+  }
+}
+
+/* 3. Tampilan untuk Laptop/PC (Layar lebar) */
+@media (min-width: 1024px) {
+  .grid-akun {
+    grid-template-columns: repeat(3, 1fr); /* Jadi 3 kolom */
+  }
+}
+
+
+.card-akun {
+  background: var(--card-bg);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: 0.4s;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-akun:hover { transform: translateY(-10px); }
+
+.img-akun {
+  width: 100%;
+  height: 180px;
+  min-height: 180px; /* Biar tetap ada ruang meski gambar hilang */
+  object-fit: cover;
+  border-radius: 15px;
+  background-color: #f0f0f0; /* Placeholder jika gambar putih */
+  margin-bottom: 15px;
+  display: block;
+}
+
+.badge-status {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  z-index: 10;
+}
+
+.badge-status.ready { background-color: #27ae60; }
+.badge-status.sold { background-color: #d63031; }
+
+.harga {
+  color: var(--secondary);
+  font-weight: 800;
+  font-size: 1.4rem;
+  margin: 10px 0;
+}
+
+/* ==========================================================================
+   5. ORDER STEPS & TESTIMONI
+   ========================================================================= */
+.order-section { padding: 80px 0; background-color: #fff; }
+.order-steps { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+.step-card { background: #f8f9fa; padding: 40px 30px; border-radius: 20px; text-align: center; flex: 1; min-width: 250px; transition: 0.3s; }
+.step-card:hover { background: var(--primary); color: white; }
+
+.testi-section { background-color: #f0f3ff; padding: 80px 0; }
+.grid-testi { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+.card-testi { background: white; padding: 30px; border-radius: 15px; text-align: center; border-bottom: 4px solid var(--primary); transition: 0.3s; }
+
+/* ==========================================================================
+   6. MODAL DETAIL (GAMBAR BESAR)
+   ========================================================================= */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 3000; padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  width: 100%; max-width: 900px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+  animation: zoomIn 0.3s ease;
+}
+
+.modal-body { display: flex; flex-direction: row; }
+
+.modal-galeri {
+  width: 55%; padding: 20px;
+  background: #f8f9fa;
+  display: flex; flex-direction: column; gap: 15px;
+}
+
+.modal-img-utama {
+  width: 100%; height: 350px; /* Foto diperbesar */
+  object-fit: contain;
+  background: #000;
+  border-radius: 12px;
+}
+
+.thumbnail-container { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
+.thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; opacity: 0.6; flex-shrink: 0; cursor: pointer; border: 2px solid transparent; }
+.active-thumb { opacity: 1; border-color: var(--primary); }
+
+.modal-info { width: 45%; padding: 40px 30px; display: flex; flex-direction: column; }
+.btn-beli-modal { width: 100%; padding: 16px; background: var(--success); color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: auto; }
+
+.close-modal { position: absolute; top: 15px; right: 20px; font-size: 30px; background: white; border-radius: 50%; width: 40px; height: 40px; border: none; cursor: pointer; z-index: 100; }
+
+/* ==========================================================================
+   7. FOOTER & BACK TO TOP
+   ========================================================================= */
+.footer { background: var(--primary); color: white; padding: 60px 8% 20px; margin-top: 50px; }
+.footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; }
+.pay-icons { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+.badge-pay { background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 5px; font-size: 0.8rem; }
+
+.back-to-top { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; z-index: 2000; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+
+/* ==========================================================================
+   8. RESPONSIVE (MOBILE)
+   ========================================================================= */
+@media (max-width: 900px) { .grid-akun { grid-template-columns: repeat(2, 1fr); } .modal-body { flex-direction: column; } .modal-galeri, .modal-info { width: 100%; } }
+@media (max-width: 768px) { .hamburger { display: flex; } .nav-links { position: absolute; top: 70px; left: -100%; flex-direction: column !important; background: white; width: 100%; height: 100vh; padding-top: 50px; transition: 0.4s; } .nav-links.active { left: 0; } .grid-akun { grid-template-columns: 1fr; } }
+@keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
